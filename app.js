@@ -14,12 +14,26 @@ app.post("/api/quotes", async (req, res) => {
 	const newQuote = await addQuote("NEW QUOTE!")
 	console.log(newQuote)
 	res.send(newQuote)
+	// Example Request: http://localhost:3000/api/quotes
+	// Don't forget it's a POST request.
 });
+
+app.patch("/api/quotes/:id", async (req, res) => {
+// Patch should update a quote.
+// console.log(req.params.id)
+const {id} = req.params
+const updatedQuote = await editQuote(id, "Different quote test.")
+// console.log(updatedQuote)
+return res.send(updatedQuote)
+
+// Example Request: http://localhost:3000/api/quotes/0f39b18b-7773-4f5e-b2f6-383b0f110c35 
+})
 
 app.use(express.json());
 
 app.get('/', function (req, res) {
 	res.send('Welcome to cwissy.rest');
+	// Example Request: http://localhost:3000 
 });
 
 // Write a request handler to return the correct response and perform the correct action when a GET request is received to /api/quotes
@@ -29,11 +43,13 @@ app.get('/api/quotes', async function (req, res) {
 		const randomQuote = await getRandomQuote();
 		// console.log(randomQuote);
 		return res.send(randomQuote.quoteText);
+		//Example Request: http://localhost:3000/api/quotes?type=random 
 	}
 	const quotes = await getQuotes();
 	console.log(quotes);
 	// res.send(quotes);
 	res.send(quotes.map(quote => quote.quoteText));
+	//Example Request: http://localhost:3000/api/quotes
 });
 
 app.listen(PORT, function () {
