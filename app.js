@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express();
-const PORT = 3000;
+const PORT = 3004;
 
 import {
 	getQuotes,
@@ -51,6 +51,17 @@ app.get('/api/quotes', async function (req, res) {
 	res.send(quotes.map(quote => quote.quoteText));
 	//Example Request: http://localhost:3000/api/quotes
 });
+
+// Write a post request to delete a post 
+app.delete('/api/quotes/:id', async function (req, res) {
+	// Pulling the id out of parameters (end of the URL) 
+	const {id} = req.params;
+	// create a new variable from the deleteQuote function - should return the deleted item
+	const deletedQuote = await deleteQuote(id);
+	// Sends the deleted quote to user
+	res.send(deletedQuote); 
+}) 
+
 
 app.listen(PORT, function () {
 	console.log(`Server is now listening on http://localhost:${PORT}`);
