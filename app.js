@@ -10,6 +10,12 @@ import {
 	deleteQuote,
 } from './quote.js';
 
+app.post("/api/quotes", async (req, res) => {
+	const newQuote = await addQuote("NEW QUOTE!")
+	console.log(newQuote)
+	res.send(newQuote)
+});
+
 app.use(express.json());
 
 app.get('/', function (req, res) {
