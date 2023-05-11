@@ -11,11 +11,13 @@ import {
   deleteQuote,
 } from "./quote.js";
 
+// Parse the JSON data and turns them into JS objects
+  // The data will need to be stringified before sending it to the client
 app.use(express.json());
 
 // Morgan Middlewear
-  // returns the morgan 'tiny' log
-app.use(morgan("tiny"));
+  // returns the morgan type:'tiny' log
+app.use(morgan("tiny")); 
 
 // Custom middleware
   // returns the number of key pairs in the object being returned
