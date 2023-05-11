@@ -12,13 +12,21 @@ import {
 } from "./quote.js";
 
 app.use(express.json());
+
+// Morgan Middlewear
+  // returns the morgan 'tiny' log
+app.use(morgan("tiny"));
+
 // Custom middleware
+  // returns the number of key pairs in the object being returned
 app.use((req, res, next) => {
   console.log(Object.keys(req).length);
   // Call the next middleware function in line
   next();
 });
 
+// returns the static file 'public' and it's contents
+  // only renders in the browser
 app.use(express.static("public"));
 
 app.post("/api/quotes", async (req, res) => {
